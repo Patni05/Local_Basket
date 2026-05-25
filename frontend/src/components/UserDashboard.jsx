@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Nav from './NaV.JSX'
+import Nav from './Nav.jsx'
 import { categories } from '../category'
 import CategoryCard from './CategoryCard'
 import { FaCircleChevronLeft } from "react-icons/fa6";
@@ -66,7 +66,7 @@ setRightButton(element.scrollLeft+element.clientWidth<element.scrollWidth)
       shopScrollRef.current.addEventListener('scroll',()=>{
          updateButton(shopScrollRef,setShowLeftShopButton,setShowRightShopButton)
       })
-     
+
     }
 
     return ()=>{cateScrollRef?.current?.removeEventListener("scroll",()=>{
@@ -102,7 +102,7 @@ setRightButton(element.scrollLeft+element.clientWidth<element.scrollWidth)
         <div className='w-full relative'>
           {showLeftCateButton &&  <button className='absolute left-0 top-1/2 -translate-y-1/2 bg-[#ff4d2d] text-white p-2 rounded-full shadow-lg hover:bg-[#e64528] z-10' onClick={()=>scrollHandler(cateScrollRef,"left")}><FaCircleChevronLeft />
           </button>}
-         
+
 
           <div className='w-full flex overflow-x-auto gap-4 pb-2 ' ref={cateScrollRef}>
             {categories.map((cate, index) => (
@@ -112,7 +112,7 @@ setRightButton(element.scrollLeft+element.clientWidth<element.scrollWidth)
           {showRightCateButton &&  <button className='absolute right-0 top-1/2 -translate-y-1/2 bg-[#ff4d2d] text-white p-2 rounded-full shadow-lg hover:bg-[#e64528] z-10' onClick={()=>scrollHandler(cateScrollRef,"right")}>
 <FaCircleChevronRight />
           </button>}
-         
+
         </div>
       </div>
 
@@ -121,7 +121,7 @@ setRightButton(element.scrollLeft+element.clientWidth<element.scrollWidth)
  <div className='w-full relative'>
           {showLeftShopButton &&  <button className='absolute left-0 top-1/2 -translate-y-1/2 bg-[#ff4d2d] text-white p-2 rounded-full shadow-lg hover:bg-[#e64528] z-10' onClick={()=>scrollHandler(shopScrollRef,"left")}><FaCircleChevronLeft />
           </button>}
-         
+
 
           <div className='w-full flex overflow-x-auto gap-4 pb-2 ' ref={shopScrollRef}>
             {shopInMyCity?.map((shop, index) => (
@@ -131,7 +131,7 @@ setRightButton(element.scrollLeft+element.clientWidth<element.scrollWidth)
           {showRightShopButton &&  <button className='absolute right-0 top-1/2 -translate-y-1/2 bg-[#ff4d2d] text-white p-2 rounded-full shadow-lg hover:bg-[#e64528] z-10' onClick={()=>scrollHandler(shopScrollRef,"right")}>
 <FaCircleChevronRight />
           </button>}
-         
+
         </div>
       </div>
 
