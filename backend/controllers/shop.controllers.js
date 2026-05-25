@@ -37,12 +37,14 @@ export const getMyShop=async (req,res) => {
             return null
         }
         return res.status(200).json(shop)
-    } catch (error) {
+    }
+     catch (error) {
     console.log(error)
 
     return res.status(500).json({
         message: error.message
     })
+}
 }
 
 export const getShopByCity=async (req,res) => {
