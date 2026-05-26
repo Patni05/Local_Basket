@@ -27,5 +27,10 @@ export const sendDeliveryOtpMail=async (user,otp) => {
         to:user.email,
         subject:"Delivery OTP",
         html:`<p>Your OTP for delivery is <b>${otp}</b>. It expires in 5 minutes.</p>`
+
     })
 }
+
+
+console.log("EMAIL:", process.env.EMAIL)
+console.log("PASS:", process.env.PASS)
