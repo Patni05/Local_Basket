@@ -1,6 +1,8 @@
 import nodemailer from "nodemailer"
 import dotenv from "dotenv"
+
 dotenv.config()
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -9,37 +11,47 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL,
     pass: process.env.PASS,
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
-transporter.verify((error, success) => {
-   if (error) {
-      console.log("MAIL ERROR =>", error);
-   } else {
-      console.log("MAIL SERVER READY");
-   }
-});
+export const sendOtpMail = async (to, otp) => {
+  try {
 
-export const sendOtpMail=async (to,otp) => {
-    await transporter.sendMail({
-        from:process.env.EMAIL,
-        to,
-        subject:"Reset Your Password",
-        html:`<p>Your OTP for password reset is <b>${otp}</b>. It expires in 5 minutes.</p>`
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL,
+      to,
+      subject: "Reset Your Password",
+      html: `<p>Your OTP for password reset is <b>${otp}</b>. It expires in 5 minutes.</p>`
     })
-}
 
+    console.log("MAIL SENT =>", info)
+
+  } catch (error) {
+    console.log("SEND MAIL ERROR =>", error)
+  }
+}
 
 export const sendDeliveryOtpMail = async (user, otp) => {
 
-    console.log("USER =>", user)
-    console.log("EMAIL =>", process.env.EMAIL)
+  try {
 
-    await transporter.sendMail({
-        from: process.env.EMAIL,
-        to: user.email,
-        subject: "Delivery OTP",
-        html: `<p>Your OTP for delivery is <b>${otp}</b>. It expires in 5 minutes.</p>`
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: user.email,
+      subject: "Delivery OTP",
+      html: `<p>Your OTP for delivery is <b>${otp}</b>. It expires in 5 minutes.</p>`
     })
+
+    console.log("MAIL SENT =>", info)
+
+  } catch (error) {
+    console.log("SEND MAIL ERROR =>", error)
+  }
 }
 
 console.log("EMAIL:", process.env.EMAIL)
