@@ -513,6 +513,7 @@ export const sendDeliveryOtp = async (req, res) => {
     shopOrder.deliveryOtp = otp;
     shopOrder.otpExpires = Date.now() + 5 * 60 * 1000;
     await order.save();
+    console.log("DELIVERY OTP =>", otp)
 
     await sendDeliveryOtpMail(order.user, otp);
 
@@ -521,6 +522,7 @@ export const sendDeliveryOtp = async (req, res) => {
   } catch (error) {
     console.error("OTP ERROR:", error);
     return res.status(500).json({ message: "delivery otp error" });
+
   }
 };
 
